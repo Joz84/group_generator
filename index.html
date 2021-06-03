@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="#" id="list-form">
+        <label for="url">Url de Liste</label>
+        <input type="text" name="url", id="url">
+
+        <label for="hybrid">hybride</label>
+        <input type="checkbox" name="hybrid" id="hybrid">
+        <input type="submit" value="Calculer">
+    </form>
+
+    <div class="d-none" id="total">
+        <h2>Liste des groupes</h2>
+        <ul></ul>
+    </div>
+    <div class="d-none" id="present">
+        <h2>Liste des groupes en présentiel</h2>
+        <ul></ul>
+    </div>
+
+    <div class="d-none" id="visio">
+        <h2>Liste des groupes en distanciel</h2>
+        <ul></ul>
+    </div>
+
+    <script>
+        const form = document.querySelector("#list-form")
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const url = document.querySelector("#url").value;
+            const hybrid = document.querySelector("#hybrid").checked
+            diplayGroups(list, hybrid)
+        })
+
+        const shuffleArray = arr => arr.sort(() => Math.random() - 0.5);
+        
+        const createGroups = (list, nbr_person=3, nbr_group=null ) => {
+            var shuffleList = shuffleArray(list);
+            var nbr = nbr_person;
+            if (nbr_group) {
+                nbr = Math.trunc(list.length / nbr_group);
+            }
+
+            var groups = [];
+            for (let i = 0; i < list.length; i += nbr) {
+                groups.push(list.slice(i, i + nbr));
+            }
+            return groups
+        }
+
+        var list = [
+            { name: "Nina S", visio: 1}, 
+            { name: "Clement C", visio: 1}, 
+            { name: "Julie C", visio: 1}, 
+            { name: "Florian K", visio: 1},
+            { name: "Pierre B", visio: 1}, 
+            { name: "Alexis F", visio: 1}, 
+            { name: "Damien C", visio: 1}, 
+            { name: "Nouha A", visio: 1},
+            { name: "Jessika M", visio: 0}, 
+            { name: "Michael K", visio: 0},
+            { name: "Anaïs A", visio: 0}, 
+            { name: "Julie L", visio: 0}, 
+            { name: "Loïc T", visio: 0}, 
+            { name: "Loïc R", visio: 0},
+            { name: "Marie-Laure P", visio: 0}, 
+            { name: "Ahmad N", visio: 0}, 
+            { name: "Gwendélina P", visio: 0},
+            { name: "Léa B", visio: 0}, 
+            { name: "Pierre K", visio: 0}, 
+            { name: "Adrien F", visio: 0}, 
+            { name: "Hugo F", visio: 0},
+            { name: "Alexandre B", visio: 0}]
+ 
+
+        const diplayGroups = (list, hybrid=false) => {
+            if (hybrid) {  
+                const presentList = document.querySelector("#present")
+                const visioList = document.querySelector("#visio")
+                var distanciels = list.filter( student => student.visio)
+                var presentiels = list.filter( student => !(student.visio))
+                var pGroups = createGroups(presentiels);
+                var dGroups = createGroups(distanciels);        
+            } else {
+                const totalList = document.querySelector("#total")
+                console.dir(totalList);
+                const ul = totalList.querySelector("ul")
+                var groups = createGroups(list);
+                let group_i = 1
+                groups.forEach((group) => {
+                    ul.insertAdjacentHTML("beforeend", `<h3>GROUPE ${group_i}</h3>`)
+                    group.forEach((student) => {
+                        ul.insertAdjacentHTML("beforeend", `<li>${student.name}</li>`)
+                    })
+                    group_i += 1;
+                })
+            }
+        }
+    </script>
+    <script>
+        // var presentiels = [
+        //        "Clement C", 
+        //        "Julie C", ,
+        //        "Pierre B",  
+        //        "Loïc T", 
+        //        "Loïc R",
+        //        "Marie-Laure P",  
+        //        "Gwendélina P",
+        //        "Pierre K", 
+        //        "Hugo F"
+        //        ]
+
+        // var distanciels = [
+        //         "Alexis F", 
+        //         "Léa B",
+        //         "Nina S",
+        //         "Jessika M",
+        //         "Alexandre B",
+        //         "Nouha A",
+        //         "Damien C",
+        //         "Ahmad N",
+        //         "Florian K",
+        //         "Julie L",
+        //         "Adrien F",
+        //         "Michael K",
+        //         "Anaïs A",
+        //     ] 
+    </script>
+</body>
+</html>
+
