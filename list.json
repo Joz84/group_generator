@@ -1,6 +1,6 @@
 [
     {"name":"Nina S","visio":1},
-    {"name":"Clement C","visio":1},
+    {"name":"Clement C","visio":0},
     {"name":"Julie C","visio":0},
     {"name":"Florian K","visio":1},
     {"name":"Pierre B","visio":0},
@@ -12,7 +12,7 @@
     {"name":"Anaïs A","visio":1},
     {"name":"Julie L","visio":0},
     {"name":"Loïc T","visio":0},
-    {"name":"Loïc R","visio":0},
+    {"name":"Loïc R","visio":1},
     {"name":"Marie-Laure P","visio":0},
     {"name":"Ahmad N","visio":0},
     {"name":"Gwendélina P","visio":0},
